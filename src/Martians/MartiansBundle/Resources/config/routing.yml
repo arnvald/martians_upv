@@ -1,0 +1,3 @@
+MartiansBundle_homepage:
+    pattern:  /hello/{name}
+    defaults: { _controller: MartiansBundle:Default:index }
