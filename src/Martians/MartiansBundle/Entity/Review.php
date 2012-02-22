@@ -1,6 +1,7 @@
 <?php
 namespace Martians\MartiansBundle\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 /** @ORM\Entity */
@@ -9,14 +10,23 @@ class Review
 	/**
 	* @ORM\Id
 	* @ORM\Column(type="integer")
+	* @Assert\Min(0)
 	*/
 	protected $id;
 	
-	/** @ORM\Column(type="string", length=100) */
-	protected $reviewer;
-	
-	/** @ORM\Column(type="date", unique="true") */
+	/**
+	* @ORM\Id
+	* @ORM\Column(type="date")
+	* @Assert\Date()
+	* @Assert\NotBlank()
+	*/
 	protected $date;
+	
+	/** 
+	* @ORM\Column(type="string", length=100)
+	* @Assert\NotBlank()
+	*/
+	protected $reviewer;
 	
 	/** @ORM\ManyToOne(targetEntity="Martians\MartiansBundle\Entity\Aircraft") */
 	protected $aircraft_id;

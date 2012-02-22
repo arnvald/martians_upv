@@ -1,21 +1,29 @@
 <?php
 namespace Martians\MartiansBundle\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 /** @ORM\Entity */
-class AirCraft
+class Aircraft
 {
 	/**
 	* @ORM\Id
 	* @ORM\Column(type="integer")
+	* @Assert\Min(0)
 	*/
 	protected $id;
 	
-	/** @ORM\Column(type="string", length=100) */
+	/** 
+	* @ORM\Column(type="string", length=100)
+	* @Assert\NotBlank()
+	*/
 	protected $name;
 	
-	/** @ORM\Column(type="integer") */
+	/** 
+	* @ORM\Column(type="integer")
+	* @Assert\Min(0)
+	*/
 	protected $max_passenger;
 	
 	/**
@@ -29,6 +37,11 @@ class AirCraft
 	* @ORM\JoinColumn(name="mothership_destination_id", referencedColumnName="id")
 	*/
 	protected $mothership_destination_id;
+
+	public function __toString()
+	{
+		return $this->getName();
+	}
 
     /**
      * Set id
@@ -93,9 +106,9 @@ class AirCraft
     /**
      * Set mothership_origin_id
      *
-     * @param Martians\MartiansBundel\Entity\Mothership $mothershipOriginId
+     * @param Martians\MartiansBundle\Entity\Mothership $mothershipOriginId
      */
-    public function setMothershipOriginId(\Martians\MartiansBundel\Entity\Mothership $mothershipOriginId)
+    public function setMothershipOriginId(\Martians\MartiansBundle\Entity\Mothership $mothershipOriginId)
     {
         $this->mothership_origin_id = $mothershipOriginId;
     }
@@ -103,7 +116,7 @@ class AirCraft
     /**
      * Get mothership_origin_id
      *
-     * @return Martians\MartiansBundel\Entity\Mothership 
+     * @return Martians\MartiansBundle\Entity\Mothership 
      */
     public function getMothershipOriginId()
     {
@@ -113,9 +126,9 @@ class AirCraft
     /**
      * Set mothership_destination_id
      *
-     * @param Martians\MartiansBundel\Entity\Mothership $mothershipDestinationId
+     * @param Martians\MartiansBundle\Entity\Mothership $mothershipDestinationId
      */
-    public function setMothershipDestinationId(\Martians\MartiansBundel\Entity\Mothership $mothershipDestinationId)
+    public function setMothershipDestinationId(\Martians\MartiansBundle\Entity\Mothership $mothershipDestinationId)
     {
         $this->mothership_destination_id = $mothershipDestinationId;
     }
@@ -123,7 +136,7 @@ class AirCraft
     /**
      * Get mothership_destination_id
      *
-     * @return Martians\MartiansBundel\Entity\Mothership 
+     * @return Martians\MartiansBundle\Entity\Mothership 
      */
     public function getMothershipDestinationId()
     {

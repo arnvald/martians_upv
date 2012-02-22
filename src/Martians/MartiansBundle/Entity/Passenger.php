@@ -1,7 +1,7 @@
 <?php
 namespace Martians\MartiansBundle\Entity;
 
-use Martians\MartiansBundle\Entity\Review as reviews;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 /** @ORM\Entity */
@@ -10,13 +10,19 @@ class Passenger
 	/**
 	* @ORM\Id
 	* @ORM\Column(type="integer")
+	* @Assert\Min(0)
 	*/
 	protected $id;
 	
-	/** @ORM\Column(type="string", length=100) */
+	/** 
+	* @ORM\Column(type="string", length=100)
+	* @Assert\NotBlank()
+	*/
 	protected $name;
 	
-	/** @ORM\ManyToOne(targetEntity="Martians\MartiansBundle\Entity\Aircraft") */
+	/** 
+	*@ORM\ManyToOne(targetEntity="Martians\MartiansBundle\Entity\Aircraft") 
+	*/
 	protected $aircraft_id;
 
     /**
